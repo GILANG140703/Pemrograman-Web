@@ -1,0 +1,1 @@
+file ini di run pada APk laragon kalau mau run taruh file ini pada -> folder www 
