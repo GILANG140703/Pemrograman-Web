@@ -1,37 +1,49 @@
-const input = document.getElementById('input');
-const list = document.getElementById('list');
+const input = document.getElementById("input");
+const list = document.getElementById("list");
 
+// Fungsi untuk menambahkan task baru
 function addTask() {
-    if (input.value === '') {
-        alert("Input Tidak boleh kosong")
-    }
-    else{
-        const li = document.createElement('li');
-        li.innerHTML = input.value;
-        list.appendChild(li);
+  if (input.value === "") {
+    alert("Input tidak boleh kosong");
+  } else {
+    const li = document.createElement("li");
+   
+    // Tambahkan tombol Edit dan Hapus (×)
+    const spanEdit = document.createElement("button");
+    spanEdit.innerHTML = "Edit";
+    spanEdit.className = "editBtn";
+    spanEdit.onclick = function () {
+      editTask(li);
+    };
 
-        const span = document.createElement('span');
-        span.innerHTML = "\u00d7";
-        li.appendChild(span);
-    }
-    input.value = '';
+    const spanRemove = document.createElement("span");
+    spanRemove.innerHTML = "\u00d7";
+    spanRemove.className = "removeBtn";
+
+    li.appendChild(spanEdit);
+    li.appendChild(spanRemove);
+    list.appendChild(li);
+  }
+  input.value = "";
 }
 
-list.addEventListener('click', function(e) {
-    if (e.target.tagName === 'LI') {
-        e.target.classList.toggle('checked');
-    }
-    else if (e.target.tagName === 'SPAN') {
-        e.target.parentElement.remove();
-    }
-    
-}, false);
+// Fungsi untuk mengedit task
+function editTask(li) {
+  const newValue = prompt("Edit task:", li.firstChild.nodeValue);
+  if (newValue) {
+    li.firstChild.nodeValue = newValue;
+  }
+}
 
-// function saveData() {
-//     const data = list.innerHTML;
-//     localStorage.setItem('data', data);
-// }
-// function showTask() {
-//     list.innerHTML = localStorage.getItem('data');
-// }
-// showTask();
+// Fungsi untuk mengatur event listener di list
+list.addEventListener(
+  "click",
+  function (e) {
+    if (e.target.tagName === "LI") {
+      e.target.classList.toggle("checked");
+    } else if (e.target.tagName === "SPAN") {
+      e.target.parentElement.remove();
+    }
+  },
+  false
+);

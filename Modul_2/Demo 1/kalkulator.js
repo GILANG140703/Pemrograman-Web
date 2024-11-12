@@ -2,9 +2,9 @@ function append(value) {
   let result = document.getElementById("result");
 
   if (value === "×") {
-    result.value += "×"; // Tampilkan simbol × di layar
+    result.value += "×";
   } else if (value === "^") {
-    result.value += "^"; // Simpan ^ untuk pangkat
+    result.value += "^";
   } else {
     result.value += value;
   }
@@ -23,19 +23,16 @@ function calculate() {
   try {
     let result = document.getElementById("result").value;
 
-    // Ganti simbol × dengan * untuk kalkulasi
-    result = result.replace(/×/g, "*"); // Ganti semua × dengan *
+    result = result.replace(/×/g, "*");
 
-    // Mengganti simbol pangkat (^) dengan Math.pow
-    result = result.replace(/(\d+)\^(\d+)/g, "Math.pow($1, $2)"); // Ubah a^b menjadi Math.pow(a, b)
+    result = result.replace(/(\d+)\^(\d+)/g, "Math.pow($1, $2)");
 
-    let finalResult = eval(result); // Hitung hasil menggunakan eval
+    let finalResult = eval(result);
 
-    // Tampilkan hasil dengan mengganti kembali * menjadi ×
     document.getElementById("result").value = finalResult
       .toString()
-      .replace(/\*/g, "×"); // Ganti * dengan ×
+      .replace(/\*/g, "×");
   } catch (error) {
-    document.getElementById("result").value = "Error"; // Tampilkan error jika ada kesalahan
+    document.getElementById("result").value = "Error";
   }
 }
